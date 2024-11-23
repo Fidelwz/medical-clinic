@@ -330,7 +330,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'url' => 'patients',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
