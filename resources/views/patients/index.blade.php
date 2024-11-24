@@ -31,7 +31,7 @@
                     @endif
                 </td>
                 <td>
-                    @can('haveaccess', 'patients.create')
+                    @can('patients.createh')
                    
                     <h1>usuario con permiso para editar</h1>
                     {{-- <a title="Modificar rol" href="{{ route('patients.edit', $patient->id) }}" class="btn btn-warning"><i class="fas fa-key"></i> Modificar roles</a> --}}
