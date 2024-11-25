@@ -26,19 +26,47 @@ class AuthServiceProvider extends ServiceProvider
         //
         $this->registerPolicies();
 
+        
+
         Gate::define('haveaccess', function(User $user, $perm){
-            return $user->havePermission($perm);
+
+            if($user->fullAccess()){
+                return true;
+            }
+
+            return $user->hasPermissionTo($perm);
         });
 
         /** Roles **/
         Gate::define('admin', function(User $user){
-            return $user->haveRole('admin');
+            return $user->hasRole('admin');
         });
 
 
+     
+        
+        
+         Gate::define('doctor', function(User $user){
 
-        Gate::define('patients', function(User $user){
-            return $user->havePermission('patients.create');
-        });
+            if($user->fullAccess()){
+                return true;
+            }
+             return $user->hasPermissionTo(permission: 'patients.index');
+         });
+
+
+         Gate::define('nourse', function(User $user){
+
+            if($user->fullAccess()){
+                return true;
+            }
+             return $user->hasPermissionTo(permission: 'patients.index');
+         });
+
+
+
+         
+
+
     }
 }

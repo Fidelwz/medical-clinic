@@ -332,6 +332,7 @@ return [
             'text' => 'profile',
             'url' => 'patients',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'doctor'
         ],
         [
             'text' => 'change_password',

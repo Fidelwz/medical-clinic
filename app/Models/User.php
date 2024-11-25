@@ -44,4 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    //FULL ACCESS LOGIC
+
+    public function fullAccess(){
+        foreach($this->roles as $role){
+            if($role->full_access === 'yes'){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
 }
