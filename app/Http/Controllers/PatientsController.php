@@ -14,9 +14,7 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        Gate::authorize( 'haveaccess', 'patients.index');
-        $patients = User::all();
-        return view('patients.index',compact('patients'));
+        
     }
 
     /**

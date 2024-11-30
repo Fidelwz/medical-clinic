@@ -1,41 +1,38 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
-
-
  @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
-@section('content_header')
-    <h1>Fidel</h1>
-@stop
 
-@section('content')
-    <p>Welcome to this beautiful admin panel.</p>
-@stop
 
 @section('css')
     {{-- Add here extra stylesheets --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
+@section('content')
 
+
+
+
+<div id="app">
+  @yield('content-wrapper')
+</div>
+@stop
 @section('js')
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+
+
+<script
+src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+crossorigin="anonymous"></script>
     <script src="{{ asset('./js/test.js') }}" defer></script>
-@stop 
+    <script src="//cdn.datatables.net/2.1.8/js/dataTables.js"> </script>
+
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
+
+
+
+    @yield('scripts')
+@stop  

@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -299,12 +299,17 @@ return [
     */
 
     'menu' => [
+        
         // Navbar items:
-        // [
-        //     'type' => 'navbar-search',
-        //     'text' => 'search',
-        //     'topnav_right' => true,
-        // ],
+        [
+            'type' => 'darkmode-widget',
+            'topnav_right' => true,     // Or "topnav => true" to place on the left.
+        ],
+        [
+            'type' => 'sidebar-menu-search',
+            'text' => 'search',             // Placeholder for the underlying input.
+            'id' => 'sidebarMenuSearch'     // ID attribute for the underlying input (optional).
+        ],
         // [
         //     'type' => 'fullscreen-widget',
         //     'topnav_right' => true,
@@ -355,7 +360,7 @@ return [
         ],
         [
             'text' => 'Pacientes',
-            'url' => 'patients',
+            'url' => 'profiles/index',
             'icon' => 'fas fa-fw fa-users',
             'can' => 'patients'
         ],

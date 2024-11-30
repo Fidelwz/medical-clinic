@@ -1,14 +1,10 @@
-@extends('adminlte::page')
-@section('title', 'Lista de Usuarios')
+@extends('dashboard')
 
-@section('content_header')
-    <h1>Lista de Usuarios</h1>
-@stop
-@section('content')
+@section('content-wrapper')
 <div class="container">
     <h1 class="title">lista de Usuarios</h1>
 
-    <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <table id="example" class="table table-striped table-bordered " style="width:100%">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -52,15 +48,17 @@
 
 
 @section('scripts')
-
 <script>
-    $(document).ready(function() {
+    
+  $(document).ready(function() {
         $('#example').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
+           
+            language: {
+        url: '//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json',
+    },
         });
     });
+
 </script>
 
 @if(session('status_success'))
