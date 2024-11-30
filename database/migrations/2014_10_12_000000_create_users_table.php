@@ -18,8 +18,22 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('sex')->nullable();
+
+            //field for patient
+            $table->string('file')->nullable();
+            //field for doctor
+            $table->foreignId('id_office')->nullable()->constrained('office')->onDelete('set null');
+
+
             $table->timestamps();
         });
+
+
+
+
+
+
     }
 
     /**

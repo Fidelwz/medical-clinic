@@ -55,13 +55,40 @@ class AuthServiceProvider extends ServiceProvider
          });
 
 
-         Gate::define('nourse', function(User $user){
+         Gate::define('secretary', function(User $user){
 
             if($user->fullAccess()){
                 return true;
             }
              return $user->hasPermissionTo(permission: 'patients.index');
          });
+
+         Gate::define('appointment', function(User $user){
+
+            if($user->fullAccess()){
+                return true;
+            }
+             return $user->hasPermissionTo(permission: 'patients.index');
+         });
+
+
+         Gate::define('office', function(User $user){
+
+            if($user->fullAccess()){
+                return true;
+            }
+             return $user->hasPermissionTo(permission: 'patients.index');
+         });
+
+
+         Gate::define('patients', function(User $user){
+
+            if($user->fullAccess()){
+                return true;
+            }
+             return $user->hasPermissionTo(permission: 'patients.index');
+         });
+
 
 
 
