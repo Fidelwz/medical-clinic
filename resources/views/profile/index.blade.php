@@ -3,7 +3,9 @@
 @section('content-wrapper')
 <div class="container">
     <h1 class="title">lista de Usuarios</h1>
-
+    @can('haveaccess', 'patients.create')
+    <a href="{{ route('profile.create') }}" class="mt-4 btn btn-gray btn-block"><i class="fas fa-plus-circle"></i> Crear evento</a>
+    @endcan
     <table id="example" class="table table-striped table-bordered " style="width:100%">
         <thead>
             <tr>

@@ -22,6 +22,23 @@ class ProfileController extends Controller
         return view('profile.index',compact('patients'));
     }
 
+    public function create(){
+        return view('profile.create');
+    }
+
+    public function store(Request $request){
+        
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+
+        ]);
+         $data = $request->all();
+         User::create($data);
+         return redirect()->route('profile.index')->with('status_success', 'Guardado correctamente');
+    }
     public function edit(Request $request): View
     {
         return view('profile.edit', [
