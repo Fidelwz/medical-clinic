@@ -354,7 +354,7 @@ return [
         ],
         [
             'text' => 'Consultorios',
-            'url' => 'admin/settings',
+            'url' => 'offices/index',
             'icon' => 'fas fa-fw fa-plus-square',
             'can' => 'office'
         ],

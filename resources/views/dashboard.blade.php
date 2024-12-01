@@ -13,7 +13,6 @@
 
 
 
-
 <div id="app">
   @yield('content-wrapper')
 </div>

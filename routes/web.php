@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientsController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,12 @@ Route::middleware('auth')->group(function () {
 
 
     // Route::get('/patients', action: [PatientsController::class, 'index'])->name('patients.index');
+
+
+    //routes for offices
+
+    Route::get('/offices/index', [OfficeController::class, 'index'])->name('office.index');
+
     
     
 });
