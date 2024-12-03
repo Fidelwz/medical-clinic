@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
@@ -17,27 +18,33 @@ class ProfileController extends Controller
      * Display the user's profile form.
      */
     public function index(){
-        Gate::authorize( 'haveaccess', 'patients.index');
-        $patients = User::all();
-        return view('profile.index',compact('patients'));
+        
     }
 
     public function create(){
-        return view('profile.create');
+        // $roles = Role::all();
+        // return view('profile.create',compact('roles'));
     }
 
     public function store(Request $request){
-        
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
+            'role' => 'required',
+
 
         ]);
-         $data = $request->all();
-         User::create($data);
-         return redirect()->route('profile.index')->with('status_success', 'Guardado correctamente');
+
+        $data = $request->all();
+
+        $role = Role::where('id', $request->role)->value('name');
+
+        User::create($data)->assignRole($role);
+
+        return redirect()->route('profile.index')->with('status_success', 'Guardado correctamente');
     }
     public function edit(Request $request): View
     {

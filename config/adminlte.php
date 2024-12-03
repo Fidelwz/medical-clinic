@@ -336,7 +336,7 @@ return [
         
         [
             'text' => 'Secretarias',
-            'url' => 'admin/settings',
+            'url' => 'secretary/index',
             'icon' => 'fas fa-fw  fa-female',
              'can' => 'secretary'
         ],
@@ -360,7 +360,7 @@ return [
         ],
         [
             'text' => 'Pacientes',
-            'url' => 'profiles/index',
+            'url' => 'patients',
             'icon' => 'fas fa-fw fa-users',
             'can' => 'patients'
         ],

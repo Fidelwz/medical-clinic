@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Office;
+use Gate;
 use Illuminate\Http\Request;
 
 class OfficeController extends Controller
@@ -21,7 +22,8 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('haveaccess', 'office.create');
+        return view('office.create');
     }
 
     /**
@@ -29,7 +31,12 @@ class OfficeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        Office::create($request->all());
+        return redirect()->route('office.index')->with('status_success', 'Consultorio creado correctamente');
     }
 
     /**
@@ -45,7 +52,9 @@ class OfficeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        Gate::authorize('haveaccess', 'office.edit');
+        $office = Office::findOrFail($id);
+        return view('office.edit', compact('office'));
     }
 
     /**
@@ -53,14 +62,21 @@ class OfficeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        Office::findOrFail($id)->update($request->all());
+        return redirect()->route('office.index')->with('status_success', 'Consultorio actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        Gate::authorize('haveaccess', 'office.delete');
+        Office::destroy($id);
+        return redirect()->route('office.index')->with('status_success', 'Consultorio eliminado correctamente');
     }
 }

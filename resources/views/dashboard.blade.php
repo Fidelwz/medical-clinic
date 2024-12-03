@@ -8,6 +8,8 @@
     {{-- Add here extra stylesheets --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="/css/admin_custom.css">
+
+    
 @stop
 @section('content')
 
@@ -31,7 +33,22 @@ crossorigin="anonymous"></script>
 
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
 
-
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     @yield('scripts')
 @stop  
+
+
+
+
+
+
+
+
+
+
+
+
+
+

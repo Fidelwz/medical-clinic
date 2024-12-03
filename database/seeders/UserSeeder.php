@@ -30,8 +30,10 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ])->assignRole('secretary');
         User::create(attributes: [
-            'name' => 'patient',
+            'name' => 'carlo',
+            'lastName' => 'cortez',
             'email' => 'patient@gmail.com',
+            'file' => '02033920033',
             'password' => bcrypt('12345678')
         ])->assignRole('patient');
 

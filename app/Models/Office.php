@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Office extends Model
 {
     use HasFactory;
-    protected $table = 'Office';
+    protected $table = 'office';
+    public $timestamps = true;
+    protected $pirmaryKey = 'id';
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'description',
+        'created_at',
+
     ];
 }

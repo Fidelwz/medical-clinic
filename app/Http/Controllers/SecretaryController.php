@@ -5,19 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-
-class PatientsController extends Controller
+class SecretaryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Gate::authorize( 'haveaccess', 'patients.index');
-        $patients = User::role('patient')->get();
-        return view('patients.index',compact('patients'));
+        $secretaries = User::role('secretary')->get();
+        return view('secretary.index', compact('secretaries'));
     }
 
     /**
@@ -25,7 +22,7 @@ class PatientsController extends Controller
      */
     public function create()
     {
-        return view('patients.create');
+        return view('secretary.create');
     }
 
     /**
@@ -33,19 +30,6 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'email' => 'required|email|unique:users,email',
-    //     ]);
-    
-    //    $user = $request->all();
-    //     // Crear el usuario con la contraseña encriptada
-    //      User::create($user)->assignRole('patient');
-    
-    //     // Retornar la contraseña generada (solo visible temporalmente)
-    //     return redirect()->route('patients.index')->with('success', "Paciente registrado correctamente");
-
-
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -64,17 +48,15 @@ class PatientsController extends Controller
         ]);
 
         // Asignar el rol de paciente
-        $user->assignRole('patient');
+        $user->assignRole('secretary');
 
        
 
         // Redirigir con la contraseña generada
         return redirect()
-        ->route('patients.index')
-        ->with('status_success', "Paciente registrado correctamente.<br><strong>Correo:</strong> {$user->email}<br><strong>Contraseña:</strong> $temporaryPassword");
-
-
-
+        ->route('secretary.index')
+        ->with('status_success', "Secretaria registrada correctamente.<br><strong>Correo:</strong> {$user->email}<br><strong>Contraseña:</strong> $temporaryPassword");
+        
     }
 
     /**
@@ -90,8 +72,8 @@ class PatientsController extends Controller
      */
     public function edit(string $id)
     {
-        $patient = User::role('patient')->find($id);
-        return view('patients.edit',compact('patient'));
+        $secretary = User::findOrFail($id);
+        return view('secretary.edit',compact('secretary'));
     }
 
     /**
@@ -99,17 +81,13 @@ class PatientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $patient = User::findOrFail($id);
+        $secretary = User::findOrFail($id);
         $request->validate([
             'name' => 'required',
-            'file' => 'required',
+            'lastName' => 'required',
         ]);
-
-        $patient->update($request->all());
-
-    return redirect()->route('patients.index')->with('status_success', 'Perfil del paciente : '. $request->name . ' actualizado correctamente');
-
-
+        $secretary->update($request->all());
+        return redirect()->route('secretary.index')->with('status_success', "Secretaria actualizada correctamente");
     }
 
     /**
@@ -117,9 +95,8 @@ class PatientsController extends Controller
      */
     public function delete(string $id)
     {
-        $userTodelete = User::where('id', $id);
-        $userTodelete->delete();
-        return redirect()->route('patients.index')->with('status_success','Eliminado');
-
+        $secretary = User::findOrFail($id);
+        $secretary->delete();
+        return redirect()->route('secretary.index')->with('status_success', "Secretaria eliminada");
     }
 }

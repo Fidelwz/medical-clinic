@@ -2,40 +2,49 @@
 
 @section('content-wrapper')
 <div class="container">
-    <h1 class="title">lista de Usuarios</h1>
-    @can('haveaccess', 'offices.create')
-    <a href="{{ route('profile.create') }}" class="mt-4 btn btn-gray btn-block"><i class="fas fa-plus-circle"></i> Crear un nuevo consultorio</a>
+    @can('haveaccess', 'office.create')
+    <a href="{{ route('office.create') }}" class="mt-4 btn btn-gray btn-block">
+        <i class="fas fa-plus-circle"></i> Crear un nuevo consultorio
+    </a>
     @endcan
-    <table id="example" class="table table-striped table-bordered " style="width:100%">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>Número</th>
                 <th>Nombre</th>
-                <th>Correo electronico</th>
-                <th>Roles</th>
+                <th>Fecha de creación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($offices as $office)
                 <tr>
-                <td>{{ $office->name }}</td>
-                <td>{{ $office->description }}</td>
-                <td>
-                    @can('offices.create')
-                   
-                    <h1>usuario con permiso para editar</h1>
-                    {{-- <a title="Modificar rol" href="{{ route('offices.edit', $office->id) }}" class="btn btn-warning"><i class="fas fa-key"></i> Modificar roles</a> --}}
-                    @endcan
-                </td>
+                    <td>{{ $office->id }}</td>
+                    <td>{{ $office->name }}</td>
+                    <td>{{ $office->created_at->translatedFormat('d \d\e F \d\e Y \a \l\a\s h:i a') }}</td>
+                    <td class="d-flex justify-content-center align-items-center ">
+                        @can('haveaccess', 'patients.create')
+                            <a title="Modificar consultorio" href="{{ route('office.edit', $office->id) }}" class="btn btn-warning mx-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form class="form-delete" action="{{ route('office.delete', $office->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" title="Eliminar consultorio" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        @endcan
+                    </td>
                 </tr>
             @empty
-                <h2 class="text-danger"> No se encuentra ningun consultorio</h2>
+                <tr>
+                    <td colspan="4" class="text-danger text-center">No se encuentra ningún consultorio</td>
+                </tr>
             @endforelse
         </tbody>
     </table>
 </div>
 @endsection
-
 
 @section('scripts')
 <script>
@@ -48,7 +57,26 @@
     },
         });
     });
-
+    $(document).ready(function() {
+    $('.form-delete').submit(function(e){
+    e.preventDefault();
+    Swal.fire({
+    title: 'Quieres eliminar?',
+    text: "Se eliminara de forma permanente",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'si deseo eliminar',
+    cancelButtonText: 'cancelar'
+    }).then((result) => {
+    if (result.isConfirmed) {
+    this.submit();
+    
+    
+    }
+    })
+    }) });
 </script>
 
 @if(session('status_success'))
