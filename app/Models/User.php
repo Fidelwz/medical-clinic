@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Office;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+//spatie
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-//spatie
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -19,11 +20,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
+     public function consultorio(){
+        return $this->belongsTo(Office::class,'id_office');
+    }
+   
+
     protected $fillable = [
         'name',
         'lastName',
         'email',
         'file',
+        'sex',
+        'id_office',
         'password',
     ];
 

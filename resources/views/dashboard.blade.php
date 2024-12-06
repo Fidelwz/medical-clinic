@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="/css/admin_custom.css">
 
+  
     
 @stop
 @section('content')

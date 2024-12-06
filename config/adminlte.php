@@ -342,13 +342,13 @@ return [
         ],
         [
             'text' => 'Dotores',
-            'url' => 'admin/settings',
+            'url' => 'doctor/index',
             'icon' => 'fas fa-fw fa-user-md',
              'can' => 'doctor'
         ],
         [
             'text' => 'Citas',
-            'url' => 'admin/settings',
+            'url' => 'appointment/index',
             'icon' => 'fas fa-fw  fa-calendar',
             'can' => 'appointment'
         ],

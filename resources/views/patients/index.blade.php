@@ -86,7 +86,11 @@
     // Extraer el mensaje completo
     const successMessage = `{!! session('status_success') !!}`;
 
-    // Extraer correo y contraseña del mensaje usando expresiones regulares
+    // Extraer tipo de operación (registro, eliminación, etc.)
+    const operationMatch = successMessage.match(/^(.*?)<br>/);
+    const operationMessage = operationMatch ? operationMatch[1] : 'Operación realizada';
+
+    // Extraer correo y contraseña si existen
     const emailMatch = successMessage.match(/<strong>Correo:<\/strong> ([^<]+)/);
     const passwordMatch = successMessage.match(/<strong>Contraseña:<\/strong> (\w+)/);
     const email = emailMatch ? emailMatch[1] : null;
@@ -94,7 +98,7 @@
 
     // Configurar SweetAlert
     Swal.fire({
-        title: '¡Paciente creado con éxito!',
+        title: operationMessage,
         html: successMessage + 
             (email && password ? `<br><br><button id="copy-credentials" class="btn btn-sm btn-primary">Copiar credenciales</button>` : ''),
         icon: 'success',
@@ -115,7 +119,49 @@
         timer: 15000 // Cierra automáticamente después de 15 segundos
     });
 </script>
+{{ session()->forget('status_success') }} <!-- Limpia la sesión después de usarla -->
 @endif
+@if(session('status_success'))
+<script>
+    // Extraer el mensaje completo
+    const successMessage = `{!! session('status_success') !!}`;
+
+    // Extraer tipo de operación (registro, eliminación, etc.)
+    const operationMatch = successMessage.match(/^(.*?)<br>/);
+    const operationMessage = operationMatch ? operationMatch[1] : 'Operación realizada';
+
+    // Extraer correo y contraseña si existen
+    const emailMatch = successMessage.match(/<strong>Correo:<\/strong> ([^<]+)/);
+    const passwordMatch = successMessage.match(/<strong>Contraseña:<\/strong> (\w+)/);
+    const email = emailMatch ? emailMatch[1] : null;
+    const password = passwordMatch ? passwordMatch[1] : null;
+
+    // Configurar SweetAlert
+    Swal.fire({
+        title: operationMessage,
+        html: successMessage + 
+            (email && password ? `<br><br><button id="copy-credentials" class="btn btn-sm btn-primary">Copiar credenciales</button>` : ''),
+        icon: 'success',
+        showConfirmButton: false,
+        didRender: () => {
+            if (email && password) {
+                // Agregar funcionalidad para copiar correo y contraseña
+                document.getElementById('copy-credentials').addEventListener('click', () => {
+                    const credentials = `Correo: ${email}\nContraseña: ${password}`;
+                    navigator.clipboard.writeText(credentials).then(() => {
+                        Swal.fire('¡Copiado!', 'Correo y contraseña han sido copiados al portapapeles.', 'success');
+                    }).catch(() => {
+                        Swal.fire('Error', 'No se pudieron copiar las credenciales.', 'error');
+                    });
+                });
+            }
+        },
+        timer: 15000 // Cierra automáticamente después de 15 segundos
+    });
+</script>
+{{ session()->forget('status_success') }} <!-- Limpia la sesión después de usarla -->
+@endif
+
 
 
 @endsection

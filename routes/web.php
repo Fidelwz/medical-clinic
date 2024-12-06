@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\SecretaryController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,7 +70,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/secretary/edit/{id}', [SecretaryController::class, 'edit'])->name('secretary.edit');
     Route::patch('/secretary/update/{id}', [SecretaryController::class, 'update'])->name('secretary.update');
     Route::post('/secretary/delete/{id}', [SecretaryController::class, 'delete'])->name('secretary.delete');
-    
+
+
+          //doctor
+
+    Route::get('/doctor/index', [DoctorController::class, 'index'])->name('doctor.index');
+    Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
+    Route::post('/doctor/store', [DoctorController::class, 'store'])->name('doctor.store');
+    Route::get('/doctor/edit/{id}', [DoctorController::class, 'edit'])->name('doctor.edit');
+    Route::patch('/doctor/update/{id}', [DoctorController::class, 'update'])->name('doctor.update');
+    Route::post('/doctor/delete/{id}', [DoctorController::class, 'delete'])->name('doctor.delete');
+
+
+    //appointment
+    Route::get('/appointment/index', [AppointmentController::class, 'index'])->name('appointment.index');
+
 });
 
 require __DIR__.'/auth.php';
