@@ -341,7 +341,7 @@ return [
              'can' => 'secretary'
         ],
         [
-            'text' => 'Dotores',
+            'text' => 'Doctores',
             'url' => 'doctor/index',
             'icon' => 'fas fa-fw fa-user-md',
              'can' => 'doctor'

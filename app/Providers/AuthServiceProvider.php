@@ -60,7 +60,7 @@ class AuthServiceProvider extends ServiceProvider
             if($user->fullAccess()){
                 return true;
             }
-             return $user->hasPermissionTo(permission: 'patients.index');
+             return $user->hasPermissionTo(permission: 'secretary.index');
          });
 
          Gate::define('appointment', function(User $user){
@@ -68,7 +68,7 @@ class AuthServiceProvider extends ServiceProvider
             if($user->fullAccess()){
                 return true;
             }
-             return $user->hasPermissionTo(permission: 'patients.index');
+             return $user->hasPermissionTo(permission: 'appointment.index');
          });
 
 
@@ -77,7 +77,7 @@ class AuthServiceProvider extends ServiceProvider
             if($user->fullAccess()){
                 return true;
             }
-             return $user->hasPermissionTo(permission: 'patients.index');
+             return $user->hasPermissionTo(permission: 'office.index');
          });
 
 
