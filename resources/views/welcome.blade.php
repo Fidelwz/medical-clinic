@@ -29,8 +29,8 @@
             <!-- Navegación -->
             <nav class="space-x-4">
                 <a href="#inicio" class="text-gray-600 hover:text-blue-600">Inicio</a>
-                <a href="#servicios" class="text-gray-600 hover:text-blue-600">Servicios</a>
-                <a href="#citas" class="text-gray-600 hover:text-blue-600">Citas</a>
+                <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600">Iniciar sesion</a>
+                <a href="{{ route('register') }}" class="text-gray-600 hover:text-blue-600">Registrase</a>
                 <a href="#contacto" class="text-gray-600 hover:text-blue-600">Contacto</a>
             </nav>
         </div>

@@ -3,9 +3,9 @@
 @section('content-wrapper')
 <div class="container mt-4 px-5">
     <h2 class="text-center">Editar perfil</h2>
-    <form action="{{ route('doctor.update', $doctor->id) }}" method="POST" class="p-4 shadow rounded bg-light">
+    <form  action="{{ route('doctor.update', $doctor->id) }}" method="POST" class="p-4 shadow rounded bg-light">
         @csrf
-        @method('PUT')
+        @method('patch')
         <div class="d-flex flex-column align-items-center">
             <!-- Nombre -->
             <div class="mb-3 w-50">
